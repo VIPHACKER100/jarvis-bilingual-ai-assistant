@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { sfx } from '../utils/audioUtils';
 
 interface ArcReactorProps {
@@ -7,7 +7,7 @@ interface ArcReactorProps {
   language: 'en' | 'hi';
 }
 
-export const ArcReactor: React.FC<ArcReactorProps> = ({ isActive, onClick, language }) => {
+export const ArcReactor: FC<ArcReactorProps> = ({ isActive, onClick, language }) => {
   const [rotation, setRotation] = useState(0);
 
   // Simple rotation effect for interaction
@@ -35,8 +35,8 @@ export const ArcReactor: React.FC<ArcReactorProps> = ({ isActive, onClick, langu
 
       {/* --- Ambient Glow (Far Field) --- */}
       <div className={`absolute rounded-full transition-all duration-1000 ${isActive
-          ? 'w-[500px] h-[500px] bg-cyan-500/5 blur-3xl animate-pulse-core'
-          : 'w-64 h-64 bg-slate-800/20 blur-xl opacity-50'
+        ? 'w-[500px] h-[500px] bg-cyan-500/5 blur-3xl animate-pulse-core'
+        : 'w-64 h-64 bg-slate-800/20 blur-xl opacity-50'
         }`} />
 
       {/* --- Outer Mechanical Ring (Slow Rotate) --- */}
@@ -77,8 +77,8 @@ export const ArcReactor: React.FC<ArcReactorProps> = ({ isActive, onClick, langu
         <svg
           viewBox="0 0 24 24"
           className={`relative z-20 w-20 h-20 mb-2 transition-all duration-500 ${isActive
-              ? 'text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,1)]'
-              : 'text-slate-600'
+            ? 'text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,1)]'
+            : 'text-slate-600'
             }`}
           fill="currentColor"
         >

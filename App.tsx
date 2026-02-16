@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 import { ArcReactor } from './components/ArcReactor';
 import { HistoryLog } from './components/HistoryLog';
 import { VolumeControl } from './components/VolumeControl';
@@ -9,7 +9,7 @@ import { processTranscript } from './services/commandProcessor';
 import { INITIAL_VOLUME } from './constants';
 import { sfx } from './utils/audioUtils';
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [mode, setMode] = useState<AppMode>(AppMode.IDLE);
   const [transcript, setTranscript] = useState<string>("");
   const [history, setHistory] = useState<CommandResult[]>([]);

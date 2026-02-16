@@ -1,20 +1,17 @@
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" width="100%" alt="JARVIS AI Banner" />
-
 # 🤖 JARVIS: Bilingual AI Assistant
 
-### Developed by **VIPHACKER100** (Aryan Ahirwar)
+![JARVIS AI Banner](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
 
-  [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
-  [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+## Developed by **VIPHACKER100** (Aryan Ahirwar)
 
-  ---
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
-  **JARVIS** is a futuristic, voice-activated AI assistant designed for a bilingual experience. It supports both **English** and **Hindi**, providing a seamless bridge for users in mixed-language environments. Inspired by Tony Stark's legendary companion, it features a sleek cyberpunk UI powered by a core **Arc Reactor**.
+---
 
-</div>
+**JARVIS** is a futuristic, voice-activated AI assistant designed for a bilingual experience. It supports both **English** and **Hindi**, providing a seamless bridge for users in mixed-language environments. Inspired by Tony Stark's legendary companion, it features a sleek cyberpunk UI powered by a core **Arc Reactor**.
 
 ## ✨ Key Features
 
@@ -81,14 +78,13 @@
 
 ## 👤 Author
 
-**VIPHACKER100**
+### VIPHACKER100
 
 - GitHub: [@VIPHACKER100](https://github.com/VIPHACKER100)
 - Portfolio/Links: [viphacker100.xyz](https://viphacker100.xyz) (Example)
 
 ---
 
-<p align="center">
-  <i>"I'm JARVIS. I'm here to help."</i><br>
-  <strong>Part of the VIPHACKER100 Ecosystem</strong>
-</p>
+*"I'm JARVIS. I'm here to help."*
+
+**Part of the VIPHACKER100 Ecosystem**

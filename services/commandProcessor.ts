@@ -10,62 +10,63 @@ export interface ProcessedCommand {
   data?: any;
 }
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
 
-// Initialize Gemini API
-const API_KEY = process.env.GEMINI_API_KEY || "";
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+// ... (keywords remain unchanged)
 
-// Keywords for robust language scoring
-const HINDI_KEYWORDS = new Set([
-  'kholo', 'band', 'karo', 'chalao', 'bhejo', 'kaun', 'kya', 'hai', 'samay',
-  'tareekh', 'din', 'aaj', 'kal', 'suno', 'sun', 'raha', 'hu', 'mujhe', 'tum', 'aap',
-  'namaste', 'shukriya', 'dhanyavad', 'kaise', 'madad', 'sakte', 'ho', 'btao', 'batao',
-  'dekhna', 'ruko', 'dheere', 'tez', 'badhao', 'kam', 'aawaz', 'par', 'ko', 'me',
-  'se', 'ka', 'ki', 'aur', 'kahan', 'kab', 'kyu', 'open', // 'open karo' common hinglish
-  'mausam', 'tapman', 'garmi', 'sardi', 'hisab', 'jodo', 'ghatao', 'guna', 'bhag'
-]);
-
-const ENGLISH_KEYWORDS = new Set([
-  'open', 'close', 'play', 'send', 'message', 'tell', 'what', 'is', 'the', 'time', 'date',
-  'today', 'who', 'are', 'you', 'hello', 'hi', 'thank', 'thanks', 'help', 'commands', 'features', 'list',
-  'search', 'volume', 'increase', 'decrease', 'navigate', 'go', 'to', 'for', 'on',
-  'can', 'please', 'start', 'stop', 'weather', 'temperature', 'forecast', 'calculate', 'solve', 'math', 'plus', 'minus', 'times', 'divided'
-]);
-
-// Helper to robustly detect language based on script and keywords
-const detectLanguage = (text: string): 'en' | 'hi' => {
-  const lowerText = text.toLowerCase();
-
-  // 1. Script Check (Absolute confidence for Devanagari)
-  const devanagariRange = /[\u0900-\u097F]/;
-  if (devanagariRange.test(text)) {
-    return 'hi';
-  }
-
-  // 2. Keyword Scoring for Latin script (Hinglish vs English)
-  // Clean text: remove punctuation
-  const tokens = lowerText.replace(/[^\w\s]/g, '').split(/\s+/);
-
-  let hiScore = 0;
-  let enScore = 0;
-
-  tokens.forEach(t => {
-    // Exact match check
-    if (HINDI_KEYWORDS.has(t)) hiScore++;
-    if (ENGLISH_KEYWORDS.has(t)) enScore++;
-  });
-
-  // Bias towards Hindi if scores are equal but contained known Hinglish markers
-  // Otherwise default to English as it's the global default for Latin script
-  if (hiScore > enScore) return 'hi';
-  if (enScore > hiScore) return 'en';
-
-  return 'en'; // Default fallback
-};
+// ... (detectLanguage remains unchanged)
 
 export const processTranscript = async (text: string): Promise<ProcessedCommand> => {
+  // ... (security, help, greetings, etc. remain unchanged - we need to preserve them. I'll use multi_replace instead to be safe on large file)
+
+  // Keywords for robust language scoring
+  const HINDI_KEYWORDS = new Set([
+    'kholo', 'band', 'karo', 'chalao', 'bhejo', 'kaun', 'kya', 'hai', 'samay',
+    'tareekh', 'din', 'aaj', 'kal', 'suno', 'sun', 'raha', 'hu', 'mujhe', 'tum', 'aap',
+    'namaste', 'shukriya', 'dhanyavad', 'kaise', 'madad', 'sakte', 'ho', 'btao', 'batao',
+    'dekhna', 'ruko', 'dheere', 'tez', 'badhao', 'kam', 'aawaz', 'par', 'ko', 'me',
+    'se', 'ka', 'ki', 'aur', 'kahan', 'kab', 'kyu', 'open', // 'open karo' common hinglish
+    'mausam', 'tapman', 'garmi', 'sardi', 'hisab', 'jodo', 'ghatao', 'guna', 'bhag'
+  ]);
+
+  const ENGLISH_KEYWORDS = new Set([
+    'open', 'close', 'play', 'send', 'message', 'tell', 'what', 'is', 'the', 'time', 'date',
+    'today', 'who', 'are', 'you', 'hello', 'hi', 'thank', 'thanks', 'help', 'commands', 'features', 'list',
+    'search', 'volume', 'increase', 'decrease', 'navigate', 'go', 'to', 'for', 'on',
+    'can', 'please', 'start', 'stop', 'weather', 'temperature', 'forecast', 'calculate', 'solve', 'math', 'plus', 'minus', 'times', 'divided'
+  ]);
+
+  // Helper to robustly detect language based on script and keywords
+  const detectLanguage = (text: string): 'en' | 'hi' => {
+    const lowerText = text.toLowerCase();
+
+    // 1. Script Check (Absolute confidence for Devanagari)
+    const devanagariRange = /[\u0900-\u097F]/;
+    if (devanagariRange.test(text)) {
+      return 'hi';
+    }
+
+    // 2. Keyword Scoring for Latin script (Hinglish vs English)
+    // Clean text: remove punctuation
+    const tokens = lowerText.replace(/[^\w\s]/g, '').split(/\s+/);
+
+    let hiScore = 0;
+    let enScore = 0;
+
+    tokens.forEach(t => {
+      // Exact match check
+      if (HINDI_KEYWORDS.has(t)) hiScore++;
+      if (ENGLISH_KEYWORDS.has(t)) enScore++;
+    });
+
+    // Bias towards Hindi if scores are equal but contained known Hinglish markers
+    // Otherwise default to English as it's the global default for Latin script
+    if (hiScore > enScore) return 'hi';
+    if (enScore > hiScore) return 'en';
+
+    return 'en'; // Default fallback
+  };
+
   // 1. Security Sanitization
   const cleanText = SecurityService.sanitizeCommand(text);
   const lowerText = cleanText.toLowerCase();
@@ -386,16 +387,32 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
     }
   }
 
-  // --- Default Fallback with LLM (Gemini) ---
+  // --- Default Fallback with LLM (OpenRouter) ---
   try {
-    if (API_KEY && API_KEY !== "your_api_key_here") {
-      const prompt = `You are JARVIS, an AI assistant. The user said: "${text}". 
-      Respond briefly in ${isHindi ? "Hindi" : "English"}. 
-      Keep it cool, slightly robotic but helpful. Max 2 sentences.`;
+    if (API_KEY && API_KEY !== "PLACEHOLDER_API_KEY") {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "model": "nvidia/nemotron-3-nano-30b-a3b:free",
+          "messages": [
+            {
+              "role": "system",
+              "content": `You are JARVIS, an AI assistant. Respond briefly in ${isHindi ? "Hindi" : "English"}. Keep it cool, slightly robotic but helpful. Max 2 sentences.`
+            },
+            {
+              "role": "user",
+              "content": text
+            }
+          ]
+        })
+      });
 
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const textResponse = response.text();
+      const data = await response.json();
+      const textResponse = data.choices?.[0]?.message?.content || (isHindi ? "क्षमा करें, मैं अभी उत्तर नहीं दे सकता।" : "I am unable to respond at the moment.");
 
       return {
         actionType: 'CONVERSATION',
@@ -405,7 +422,7 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
       };
     }
   } catch (error) {
-    console.error("Gemini API Error:", error);
+    console.error("OpenRouter API Error:", error);
   }
 
   return {
