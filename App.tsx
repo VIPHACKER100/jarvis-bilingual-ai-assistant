@@ -249,49 +249,50 @@ const App: FC = () => {
       <div className="absolute inset-0 bg-radial-gradient from-transparent to-black pointer-events-none"></div>
 
       {/* Header / Language Toggle */}
-      <header className="absolute top-0 left-0 right-0 p-6 flex justify-between items-start z-20">
-        <div>
-          <h1 className="text-3xl font-bold tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]">
+      <header className="absolute top-0 left-0 right-0 p-4 md:p-6 flex flex-col md:flex-row justify-between items-center md:items-start z-20 gap-4 md:gap-0">
+        <div className="text-center md:text-left">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-[0.2em] text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]">
             JARVIS
           </h1>
-          <p className="text-xs text-slate-500 tracking-widest mt-1">PERSONAL AI ASSISTANT // BILINGUAL PROTOCOL</p>
+          <p className="text-[10px] md:text-xs text-slate-500 tracking-widest mt-1">PERSONAL AI ASSISTANT // BILINGUAL PROTOCOL</p>
         </div>
 
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-col items-center md:items-end gap-2">
           <button
             onClick={toggleLanguage}
-            className="flex items-center space-x-2 bg-slate-900 border border-slate-700 px-3 py-1 rounded text-xs tracking-wider hover:border-cyan-500 transition-colors"
+            className="flex items-center space-x-2 bg-slate-900/80 border border-slate-700 px-4 py-2 md:px-3 md:py-1 rounded text-xs tracking-wider hover:border-cyan-500 transition-colors backdrop-blur-sm"
           >
             <span className={language === Language.ENGLISH ? "text-cyan-400 font-bold" : "text-slate-600"}>ENGLISH</span>
             <span className="text-slate-700">|</span>
             <span className={language === Language.HINDI ? "text-orange-400 font-bold" : "text-slate-600"}>हिंदी</span>
           </button>
-          <div className="text-[10px] text-slate-500 uppercase">Input Mode: {language === Language.HINDI ? 'Hi-IN (Mixed)' : 'En-US'}</div>
+          <div className="text-[10px] text-slate-500 uppercase tracking-tighter md:tracking-normal">
+            Input Mode: {language === Language.HINDI ? 'Hi-IN (Mixed)' : 'En-US'}
+          </div>
         </div>
       </header>
 
       {/* Main UI Container */}
-      <main className="relative z-10 flex flex-col items-center w-full max-w-4xl space-y-12">
+      <main className="relative z-10 flex flex-col items-center w-full max-w-4xl space-y-8 md:space-y-12 mt-16 md:mt-0">
 
-        {/* Status Text */}
         <div className="h-8 flex items-center justify-center">
           {mode === AppMode.LISTENING && (
-            <span className="text-cyan-400 tracking-widest animate-pulse font-mono">
+            <span className="text-cyan-400 tracking-widest animate-pulse font-mono text-sm md:text-base">
               LISTENING / सुन रहा हूँ...
             </span>
           )}
           {mode === AppMode.PROCESSING && (
-            <span className="text-orange-400 tracking-widest animate-pulse font-mono">
+            <span className="text-orange-400 tracking-widest animate-pulse font-mono text-sm md:text-base">
               PROCESSING / कार्य हो रहा है...
             </span>
           )}
           {mode === AppMode.SPEAKING && (
-            <span className="text-cyan-400 tracking-widest font-mono">
+            <span className="text-cyan-400 tracking-widest font-mono text-sm md:text-base">
               RESPONDING...
             </span>
           )}
           {mode === AppMode.IDLE && (
-            <span className="text-slate-600 tracking-widest font-mono">
+            <span className="text-slate-600 tracking-widest font-mono text-xs md:text-sm">
               STANDBY
             </span>
           )}
@@ -305,14 +306,14 @@ const App: FC = () => {
         />
 
         {/* Transcript Display */}
-        <div className="w-full max-w-lg text-center min-h-[60px]">
+        <div className="w-full max-w-lg text-center min-h-[60px] px-2 md:px-0">
           {transcript && (
-            <div className="bg-slate-900/50 border-x border-cyan-500/30 p-4 relative backdrop-blur-sm">
+            <div className="bg-slate-900/50 border-x border-cyan-500/30 p-3 md:p-4 relative backdrop-blur-sm">
               <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500"></div>
               <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500"></div>
               <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500"></div>
               <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500"></div>
-              <p className="text-lg md:text-xl text-white font-light tracking-wide font-sans">
+              <p className="text-base md:text-xl text-white font-light tracking-wide font-sans">
                 "{transcript}"
               </p>
             </div>
@@ -320,16 +321,16 @@ const App: FC = () => {
         </div>
 
         {/* Bottom Modules */}
-        <div className="flex flex-col md:flex-row gap-6 w-full items-start justify-center">
+        <div className="flex flex-col md:flex-row gap-6 w-full items-center md:items-start justify-center px-2">
           <HistoryLog history={history} />
-          <div className="hidden md:flex flex-col space-y-4 pt-4">
+          <div className="flex flex-col space-y-4 w-full md:w-auto items-center md:items-start">
             <VolumeControl level={volume} />
 
-            {/* Decorative Panel */}
-            <div className="border border-slate-800 bg-slate-900/40 p-3 w-64 text-[10px] font-mono text-slate-500 space-y-1">
+            {/* Decorative Panel - Condensed for Mobile */}
+            <div className="border border-slate-800 bg-slate-900/40 p-3 w-full md:w-64 text-[10px] font-mono text-slate-500 grid grid-cols-2 md:block gap-x-4 gap-y-1">
               <div className="flex justify-between"><span>CPU</span><span className="text-cyan-600">32%</span></div>
               <div className="flex justify-between"><span>MEM</span><span className="text-cyan-600">14%</span></div>
-              <div className="flex justify-between"><span>NET</span><span className="text-green-600">ONLINE</span></div>
+              <div className="flex justify-between"><span>NET</span><span className="text-green-600 uppercase">Online</span></div>
               <div className="flex justify-between"><span>MIC</span><span className={mode !== AppMode.IDLE ? "text-red-500 animate-pulse" : "text-slate-600"}>{mode !== AppMode.IDLE ? "ACTIVE" : "OFFLINE"}</span></div>
             </div>
           </div>
@@ -344,9 +345,17 @@ const App: FC = () => {
         language={language === Language.HINDI ? 'hi' : 'en'}
       />
 
-      {/* Footer */}
-      <footer className="absolute bottom-4 text-slate-700 text-[10px] tracking-[0.3em] font-light">
-        STARK INDUSTRIES SYSTEM OS V4.2.1 | DEVELOPED BY VIPHACKER100
+      {/* Footer / Branding */}
+      <footer className="absolute bottom-4 flex flex-col items-center space-y-2 z-20">
+        <div className="flex space-x-4 text-[10px] md:text-xs font-mono tracking-widest">
+          <a href="https://viphacker100.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase">Website</a>
+          <a href="https://github.com/viphacker100" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase">GitHub</a>
+          <a href="https://linkedin.com/in/viphacker100" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase">LinkedIn</a>
+          <a href="https://instagram.com/viphacker100" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase">Instagram</a>
+        </div>
+        <div className="text-slate-700 text-[8px] md:text-[10px] tracking-[0.3em] font-light uppercase text-center px-4">
+          VIPHACKER100 OS V4.2.1 | DESIGNED BY <span className="text-slate-500 font-semibold">VIPHACKER100 (ARYAN AHIRWAR)</span>
+        </div>
       </footer>
     </div>
   );

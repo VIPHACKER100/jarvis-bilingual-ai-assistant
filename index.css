@@ -9,8 +9,28 @@
 body {
     background-color: var(--dark-bg);
     color: white;
-    overflow: hidden;
-    /* Prevent scroll on main app */
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Scrollbar for Stark feel */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue);
 }
 
 /* --- Advanced Animations --- */
@@ -85,6 +105,16 @@ body {
     }
 }
 
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
 /* --- Utility Classes --- */
 
 .animate-spin-slow {
@@ -124,4 +154,19 @@ body {
 .reactor-ring-2 {
     border-left-color: transparent;
     border-right-color: transparent;
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+    .mobile-hide {
+        display: none !important;
+    }
+
+    .mobile-small-text {
+        font-size: 0.75rem;
+    }
+}
+
+.touch-action-none {
+    touch-action: none;
 }

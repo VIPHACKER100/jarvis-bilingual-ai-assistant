@@ -129,7 +129,9 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
   ) {
     return {
       actionType: 'GREETING',
-      response: isHindi ? "नमस्ते सर, मैं आपकी कैसे मदद कर सकता हूँ?" : "Hello Sir, how can I help you?",
+      response: isHindi
+        ? "नमस्ते! मैं आपकी किस तरह सहायता कर सकता हूँ?"
+        : "Hello! It's good to see you. How can I assist you today?",
       language: detectedLang
     };
   }
@@ -143,7 +145,9 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
   ) {
     return {
       actionType: 'GREETING',
-      response: isHindi ? "आपका स्वागत है सर।" : "You're welcome, Sir.",
+      response: isHindi
+        ? "आपका स्वागत है! मुझे आपकी मदद करके खुशी हुई।"
+        : "You're very welcome! I'm happy to be of service.",
       language: detectedLang
     };
   }
@@ -156,8 +160,8 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
     return {
       actionType: 'IDENTITY',
       response: isHindi
-        ? "मैं JARVIS हूँ, आपका निजी AI सहायक।"
-        : "I am JARVIS, your personal AI assistant.",
+        ? "मैं जार्विस हूँ, आपका निजी सहायक। मैं आपके कार्यों को आसान बनाने के लिए यहाँ हूँ।"
+        : "I'm JARVIS, your personal assistant. I'm here to make your life a little easier.",
       language: detectedLang
     };
   }
@@ -257,8 +261,8 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
       return {
         actionType: 'ERROR',
         response: isHindi
-          ? `संपर्क सूची में '${rawName}' नहीं मिला।`
-          : `Contact '${rawName}' not found in database.`,
+          ? `माफ कीजिये, मुझे अपनी संपर्क सूची में '${rawName}' नहीं मिला।`
+          : `I'm sorry, I couldn't find '${rawName}' in your contacts.`,
         language: detectedLang
       };
     }
@@ -277,8 +281,8 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
     return {
       actionType: 'TIME',
       response: isHindi
-        ? `अभी समय ${timeStr} है।`
-        : `Current time is ${timeStr}.`,
+        ? `अभी ${timeStr} हो रहे हैं।`
+        : `It's currently ${timeStr}.`,
       language: detectedLang
     };
   }
@@ -320,8 +324,8 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
     return {
       actionType: 'WEATHER',
       response: isHindi
-        ? `${city} में मौसम ${condition} है और तापमान ${temp} डिग्री सेल्सियस है।`
-        : `Weather in ${city} is ${condition} with a temperature of ${temp}°C.`,
+        ? `${city} में अभी ${condition} है और तापमान ${temp} डिग्री के आसपास है।`
+        : `It's ${condition} in ${city} right now, with a temperature of ${temp}°C.`,
       language: detectedLang
     };
   }
@@ -401,7 +405,7 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
           "messages": [
             {
               "role": "system",
-              "content": `You are JARVIS, an AI assistant. Respond briefly in ${isHindi ? "Hindi" : "English"}. Keep it cool, slightly robotic but helpful. Max 2 sentences.`
+              "content": `You are JARVIS, a highly intelligent and helpful AI assistant. Respond in a natural, polite, and human-like manner in ${isHindi ? "Hindi" : "English"}. Avoid sounding overly robotic. Keep it concise (max 2 sentences).`
             },
             {
               "role": "user",
@@ -427,7 +431,9 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
 
   return {
     actionType: 'UNKNOWN',
-    response: isHindi ? "क्षमा करें, मुझे समझ नहीं आया।" : "I'm sorry, I didn't understand that command.",
+    response: isHindi
+      ? "माफ़ कीजिये, मुझे समझ नहीं आया कि आप क्या कहना चाह रहे हैं।"
+      : "I'm sorry, I'm not quite sure I follow. Could you rephrase that?",
     language: detectedLang
   };
 };

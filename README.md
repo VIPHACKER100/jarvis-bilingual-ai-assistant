@@ -11,16 +11,18 @@
 
 ---
 
-**JARVIS** is a futuristic, voice-activated AI assistant designed for a bilingual experience. It supports both **English** and **Hindi**, providing a seamless bridge for users in mixed-language environments. Inspired by Tony Stark's legendary companion, it features a sleek cyberpunk UI powered by a core **Arc Reactor**.
+**JARVIS** is a futuristic, voice-activated AI assistant designed for a high-performance bilingual experience. Operating on the **VIPHACKER100 OS**, it supports both **English** and **Hindi**, providing a natural and human-like interface for users in mixed-language environments. Inspired by the legendary Stark Tech, it features a stunning, mobile-optimized cyberpunk UI powered by a core **Arc Reactor**.
 
 ## ✨ Key Features
 
-- 🎙️ **Bilingual Voice Recognition**: Understands and processes commands in both English and Hindi (Mixed mode supported).
-- 🔊 **Sleek Text-to-Speech**: Responds with clear audio feedback in the user's preferred language.
-- ⚡ **Interactive Cyberpunk UI**: A stunning interface featuring a rotating Arc Reactor, scanline effects, and real-time system logs.
-- 🛠️ **System Controls**: Control your device volume or open applications/websites using voice commands.
-- 📜 **Command History**: Detailed log of all interactions with dual-language support.
-- 📱 **Responsive Design**: Works perfectly across various screen sizes with a premium desktop-first experience.
+- 🎙️ **Bilingual Voice Recognition**: Seamlessly understands and processes commands in both English and Hindi.
+- 🗣️ **Human-Like Interaction**: Enhanced vocabulary and natural speech patterns for a more friendly, non-robotic experience.
+- 🔊 **Clear Natural Voice**: Optimized text-to-speech with prioritized high-quality voices and natural cadence.
+- ⚡ **Interactive Cyberpunk UI**: A stunning interface featuring a rotating Arc Reactor, real-time system stats, and scanline effects.
+- 🛠️ **System Controls**: Control volume, navigate websites, and get real-time info like weather and time via voice.
+- 📜 **Command History**: A detailed, scrollable log of all interactions with dual-language support and system logs.
+- 📱 **Mobile-First UX**: Fully responsive design with touch-optimized controls and adaptive layouts for all viewports.
+- 🛡️ **Security Protocol**: Built-in sanitization and threat detection for safe browsing and communication.
 
 ## 🚀 Getting Started
 
@@ -63,28 +65,31 @@
 1. Click on the **Arc Reactor** in the center to activate JARVIS.
 2. Grant microphone permissions when prompted.
 3. Use the **Language Toggle** at the top right to switch between English and Hindi.
-4. Speak your command:
-   - *"Increase volume"* or *"आवाज़ बढ़ाओ"*
-   - *"Open YouTube"* or *"यूट्यूब खोलो"*
+4. Speak your command naturally:
+   - *"Hey JARVIS, can you please open YouTube?"* or *"यूट्यूब खोलो"*
+   - *"Increase volume, it's a bit low"* or *"आवाज़ बढ़ाओ"*
    - *"Who are you?"* or *"तुम कौन हो?"*
+   - *"What's the weather in Delhi today?"* or *"मौसम कैसा है?"*
 
 ## 🛠️ Built With
 
 - **Framework**: [React 19](https://react.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) (via CDN) & Custom CSS
-- **Voice APIs**: Web Speech Recognition API & Synthesis API
-- **Typography**: [Rajdhani](https://fonts.google.com/specimen/Rajdhani) from Google Fonts
+- **Build Tool**: [Vite 6.4](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & Custom Animations
+- **AI Backend**: [OpenRouter / Gemini API](https://openrouter.ai/) for conversational intelligence
+- **Voice Stack**: Web Speech Recognition & Natural Synthesis API
+- **Typography**: [Rajdhani](https://fonts.google.com/specimen/Rajdhani) & Inter
 
 ## 👤 Author
 
-### VIPHACKER100
+### VIPHACKER100 (Aryan Ahirwar)
 
-- GitHub: [@VIPHACKER100](https://github.com/VIPHACKER100)
-- Portfolio/Links: [viphacker100.xyz](https://viphacker100.xyz) (Example)
+- **Website**: [viphacker100.com](https://viphacker100.com)
+- **GitHub**: [@VIPHACKER100](https://github.com/VIPHACKER100)
+- **LinkedIn**: [viphacker100](https://linkedin.com/in/viphacker100)
+- **Instagram**: [viphacker100](https://instagram.com/viphacker100)
 
 ---
 
 > *"I'm JARVIS. I'm here to help."*
-
 > **Part of the VIPHACKER100 Ecosystem**

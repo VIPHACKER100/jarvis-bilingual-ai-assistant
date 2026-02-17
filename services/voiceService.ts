@@ -100,9 +100,11 @@ class VoiceService {
       }
     }
 
-    // Adjust pitch/rate for JARVIS-like robotic feel
-    utterance.pitch = 0.9;
-    utterance.rate = 1;
+    // Adjust pitch/rate for a more natural human-like feel
+    // JARVIS doesn't need to be robotic to be cool.
+    utterance.pitch = 1.0;
+    utterance.rate = 0.95; // Slightly slower for clarity and naturalness
+    utterance.volume = 1.0;
 
     this.synthesis.speak(utterance);
   }
