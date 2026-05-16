@@ -1,7 +1,10 @@
 {
-  "name": "jarvis---bilingual-ai-assistant",
+  "name": "jarvis-bilingual-ai-assistant",
   "private": true,
-  "version": "0.1.0",
+  "version": "3.9.0",
+  "description": "JARVIS: Bilingual AI Assistant — powered by OpenRouter and Gemini.",
+  "author": "Aryan Ahirwar (VIPHACKER100)",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -9,11 +9,14 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![OpenRouter](https://img.shields.io/badge/OpenRouter-AI-7C3AED?style=for-the-badge)](https://openrouter.ai/)
+[![Architecture](https://img.shields.io/badge/Architecture-Docs-000000?style=for-the-badge&logo=markdown)](./ARCHITECTURE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 ---
 
 **JARVIS** is a futuristic, voice-activated AI assistant designed for a high-performance bilingual experience. Operating on the **VIPHACKER100 OS**, it supports both **English** and **Hindi**, providing a natural and human-like interface for users in mixed-language environments. Inspired by the legendary Stark Tech, it features a stunning, mobile-optimized cyberpunk UI powered by a core **Arc Reactor** and backed by the **NVIDIA Nemotron** model via OpenRouter.
+
+### 🌐 [Try the JARVIS v1 Demo Here!](./jarvis-v1.html)
 
 ## ✨ Key Features
 
