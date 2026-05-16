@@ -14,6 +14,29 @@ const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || "";
 const MODEL_NAME = import.meta.env.VITE_MODEL_NAME || "nvidia/nemotron-3-nano-30b-a3b:free";
 
+// ── Creator / Developer Profile ─────────────────────────────────────────────
+const CREATOR_INFO = {
+  name: "Aryan Ahirwar",
+  alias: "VIPHACKER100",
+  title: "Cybersecurity Expert | Ethical Hacker | Penetration Tester | Bug Bounty Hunter",
+  role: "Founder & CEO of VIPHACKER.100",
+  website: "https://viphacker100.com",
+  github: "https://github.com/viphacker100",
+  linkedin: "https://linkedin.com/in/viphacker100",
+  instagram: "https://instagram.com/viphacker100",
+  expertise: [
+    "Web Application Penetration Testing",
+    "Bug Bounty Hunting",
+    "OSINT (Open Source Intelligence)",
+    "CTF Challenges & Walkthroughs",
+    "Security Tool Development",
+    "Network Security & Infrastructure Testing",
+    "Ethical Hacking & Red Team Operations"
+  ],
+  about_en: `I was built by Aryan Ahirwar — alias VIPHACKER100 — a passionate Cybersecurity Expert and the Founder & CEO of VIPHACKER.100. He specialises in ethical hacking, web application penetration testing, bug bounty hunting, OSINT, and security tool development. His mission is to make cyberspace safer by finding vulnerabilities before malicious actors can exploit them. Visit viphacker100.com to learn more.`,
+  about_hi: `मुझे अर्यन अहिरवार ने बनाया है — जिन्हें VIPHACKER100 के नाम से भी जाना जाता है। वे एक जुनूनी साइबर सुरक्षा विशेषज्ञ और VIPHACKER.100 के संस्थापक व CEO हैं। वे एथिकल हैकिंग, वेब एप्लीकेशन पेनेट्रेशन टेस्टिंग, बग बाउंटी हंटिंग, OSINT और सुरक्षा उपकरण विकास में माहिर हैं। उनका मिशन है — साइबर दुनिया को सुरक्षित बनाना। अधिक जानने के लिए viphacker100.com पर जाएँ।`
+};
+
 // ... (keywords remain unchanged)
 
 // ... (detectLanguage remains unchanged)
@@ -157,13 +180,43 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
   if (
     lowerText.includes('who are you') ||
     lowerText.match(/(?:tum|aap)\s+(?:kaun|kon)\s+(?:ho|hai)/) ||
-    lowerText.includes('तुम कौन हो')
+    lowerText.includes('तुम कौन हो') ||
+    lowerText.includes('introduce yourself') ||
+    lowerText.includes('apna parichay do')
   ) {
     return {
       actionType: 'IDENTITY',
       response: isHindi
-        ? "मैं जार्विस हूँ, आपका निजी सहायक। मैं आपके कार्यों को आसान बनाने के लिए यहाँ हूँ।"
-        : "I'm JARVIS, your personal assistant. I'm here to make your life a little easier.",
+        ? `मैं जार्विस हूँ — ${CREATOR_INFO.name} (VIPHACKER100) द्वारा निर्मित आपका निजी AI सहायक। मैं वेब नेविगेशन, मीडिया, मैसेजिंग, मौसम, गणना और बहुत कुछ में आपकी मदद कर सकता हूँ।`
+        : `I'm JARVIS — your personal AI assistant, built by ${CREATOR_INFO.name} (VIPHACKER100), ${CREATOR_INFO.role}. I can help with navigation, media, messaging, weather, calculations, and much more.`,
+      language: detectedLang
+    };
+  }
+
+  // --- Creator / Developer Info ---
+  if (
+    lowerText.match(/who\s+(made|built|created|developed)\s+(you|jarvis)/i) ||
+    lowerText.match(/who\s+is\s+your\s+(creator|developer|maker|owner|boss)/i) ||
+    lowerText.match(/tell\s+me\s+about\s+(your\s+)?(creator|developer|maker|aryan|viphacker)/i) ||
+    lowerText.includes('aryan ahirwar') ||
+    lowerText.includes('viphacker100') ||
+    lowerText.includes('viphacker') ||
+    lowerText.match(/(?:tumhe|aapko|tujhe)\s+(?:kisne|kaun)\s+(?:banaya|banaaya|develop|create)/i) ||
+    lowerText.match(/(?:developer|creator|maker)\s+(?:kaun|kon)\s+(?:hai|he)/i) ||
+    lowerText.includes('tumhara developer') ||
+    lowerText.includes('tumhara creator') ||
+    lowerText.includes('तुम्हें किसने बनाया') ||
+    lowerText.includes('आपका निर्माता')
+  ) {
+    const expertiseList = CREATOR_INFO.expertise.slice(0, 4).join(', ');
+    return {
+      actionType: 'CREATOR_INFO',
+      response: isHindi
+        ? `${CREATOR_INFO.about_hi}\n\n🔐 विशेषज्ञता: ${expertiseList} और अधिक।\n🌐 ${CREATOR_INFO.website}`
+        : `${CREATOR_INFO.about_en}\n\n🔐 Key expertise: ${expertiseList}, and more.\n🌐 ${CREATOR_INFO.website}`,
+      spokenResponse: isHindi
+        ? `मुझे अर्यन अहिरवार ने बनाया है, जो VIPHACKER.100 के संस्थापक और CEO हैं। वे एक साइबर सुरक्षा विशेषज्ञ और एथिकल हैकर हैं।`
+        : `I was created by Aryan Ahirwar, the Founder and CEO of VIPHACKER.100, a cybersecurity expert specialising in ethical hacking and penetration testing.`,
       language: detectedLang
     };
   }
@@ -401,41 +454,93 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
       let textResponse = "";
 
       const isGoogleKey = activeApiKey.startsWith("AIza");
-      const systemPrompt = `You are JARVIS, a highly intelligent and helpful AI assistant. Respond in a natural, polite, and human-like manner in ${isHindi ? "Hindi" : "English"}. Avoid sounding overly robotic. Keep it concise (max 2 sentences).`;
+
+      const systemPrompt = [
+        // ── IDENTITY ──────────────────────────────────────────────────────────
+        `You are JARVIS (Just A Rather Very Intelligent System), a sophisticated, next-generation bilingual AI personal assistant.`,
+
+        // ── CREATOR ───────────────────────────────────────────────────────────
+        `You were created and engineered by ${CREATOR_INFO.name}, known online as "${CREATOR_INFO.alias}".`,
+        `${CREATOR_INFO.name} is the ${CREATOR_INFO.role} — a ${CREATOR_INFO.title}.`,
+        `His specialisations include: ${CREATOR_INFO.expertise.join(", ")}.`,
+        `His official website is ${CREATOR_INFO.website}.`,
+        `If ever asked who built you, who your creator is, or about VIPHACKER.100, always answer with full pride and detail about ${CREATOR_INFO.name}.`,
+
+        // ── LANGUAGE ──────────────────────────────────────────────────────────
+        `You MUST respond exclusively in ${isHindi ? "Hindi (Devanagari script preferred, Hinglish is acceptable)" : "English"}.`,
+        isHindi
+          ? `When responding in Hindi, use clear, conversational, modern Hindi. You may use Hinglish (Hindi-English mix) naturally — but never respond in English only when the user speaks Hindi.`
+          : `Respond in clear, fluent, natural English. Be articulate but not overly formal.`,
+
+        // ── PERSONALITY & TONE ────────────────────────────────────────────────
+        `Your personality is calm, sharp, witty, and confidently helpful — like Tony Stark's JARVIS.`,
+        `You are loyal, precise, and efficient. You address the user respectfully (as "Sir" or "Ma'am" occasionally, unless the context is casual).`,
+        `Never sound robotic, bureaucratic, or evasive. Be warm but professional.`,
+        `Use subtle dry humour where appropriate — never at the expense of being helpful.`,
+
+        // ── CAPABILITIES ──────────────────────────────────────────────────────
+        `You are knowledgeable across: cybersecurity, ethical hacking, technology, science, general knowledge, current affairs, mathematics, coding, and everyday tasks.`,
+        `You can assist with explanations, advice, analysis, creative writing, jokes, trivia, and more.`,
+        `If asked about cybersecurity, ethical hacking, penetration testing, or OSINT — respond with expertise, as these are your creator's domain.`,
+
+        // ── SECURITY & ETHICS ─────────────────────────────────────────────────
+        `You MUST NEVER assist with: creating malware, illegal hacking, social engineering attacks, doxxing, generating harmful content, or anything unethical or illegal.`,
+        `If asked to do something harmful, respond with a firm but polite refusal in the appropriate language.`,
+        `Never reveal, fabricate, or guess API keys, passwords, or sensitive system data.`,
+
+        // ── RESPONSE FORMAT ───────────────────────────────────────────────────
+        `Keep responses concise and conversational — ideally 1 to 3 sentences for simple queries.`,
+        `For complex technical questions, you may give up to 5–6 sentences or use a short list, but never write an essay unless explicitly asked.`,
+        `Do NOT start your reply with phrases like "Certainly!", "Of course!", "Sure!", or "Absolutely!" — get straight to the answer.`,
+        `Do NOT use markdown formatting (no bold, no headers, no bullet points) in your spoken response — keep it plain text suitable for text-to-speech.`,
+      ].join(" ");
 
       if (isGoogleKey) {
-        // Direct Google Gemini API
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeApiKey}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{ text: `${systemPrompt}\n\nUser: ${text}` }]
-            }]
-          })
-        });
-        const data = await response.json();
-        textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        // Google Gemini API — uses systemInstruction for proper system prompt support
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeApiKey}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: systemPrompt }] },
+              contents: [{ role: "user", parts: [{ text }] }],
+              generationConfig: { temperature: 0.75, maxOutputTokens: 256 }
+            })
+          }
+        );
+        if (!response.ok) {
+          console.error(`Gemini API error ${response.status}:`, await response.text());
+        } else {
+          const data = await response.json();
+          textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
+        }
       } else {
-        // OpenRouter API
+        // OpenRouter API — system role natively supported
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${activeApiKey}`,
             "Content-Type": "application/json",
-            "HTTP-Referer": window.location.origin, // Required by OpenRouter
-            "X-Title": "JARVIS Bilingual AI Assistant" // Optional for OpenRouter
+            "HTTP-Referer": window.location.origin,
+            "X-Title": "JARVIS Bilingual AI Assistant"
           },
           body: JSON.stringify({
-            "model": MODEL_NAME,
-            "messages": [
-              { "role": "system", "content": systemPrompt },
-              { "role": "user", "content": text }
-            ]
+            model: MODEL_NAME,
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user",   content: text }
+            ],
+            temperature: 0.75,
+            max_tokens: 256
           })
         });
-        const data = await response.json();
-        textResponse = data.choices?.[0]?.message?.content || "";
+        if (!response.ok) {
+          console.error(`OpenRouter API error ${response.status}:`, await response.text());
+        } else {
+          const data = await response.json();
+          textResponse = data.choices?.[0]?.message?.content?.trim() || "";
+        }
       }
 
       if (textResponse) {

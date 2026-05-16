@@ -346,16 +346,53 @@ const App: FC = () => {
       />
 
       {/* Footer / Branding */}
-      <footer className="relative w-full flex flex-col items-center space-y-4 z-20 mt-auto py-10 bg-black/60 backdrop-blur-sm border-t border-slate-900">
-        <div className="flex flex-wrap justify-center gap-6 text-[10px] md:text-xs font-mono tracking-widest">
-          <a href="https://viphacker100.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase border-b border-transparent hover:border-cyan-400 pb-1">Website</a>
-          <a href="https://github.com/viphacker100" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase border-b border-transparent hover:border-cyan-400 pb-1">GitHub</a>
-          <a href="https://linkedin.com/in/viphacker100" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase border-b border-transparent hover:border-cyan-400 pb-1">LinkedIn</a>
-          <a href="https://instagram.com/viphacker100" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors uppercase border-b border-transparent hover:border-cyan-400 pb-1">Instagram</a>
+      <footer className="relative w-full flex flex-col items-center space-y-5 z-20 mt-auto pt-10 pb-8 bg-black/60 backdrop-blur-sm border-t border-slate-900">
+
+        {/* Creator Card */}
+        <div className="flex flex-col items-center gap-1 text-center">
+          <div className="text-cyan-500 text-[11px] md:text-xs font-mono tracking-[0.3em] uppercase drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
+            ⚡ Built by
+          </div>
+          <div className="text-white text-sm md:text-base font-bold tracking-widest uppercase">
+            Aryan Ahirwar
+          </div>
+          <div className="text-slate-400 text-[9px] md:text-[10px] tracking-widest font-mono uppercase">
+            Alias: VIPHACKER100
+          </div>
+          <div className="text-slate-500 text-[8px] md:text-[9px] tracking-[0.2em] text-center max-w-sm leading-relaxed px-4">
+            Cybersecurity Expert · Ethical Hacker · Penetration Tester · Bug Bounty Hunter
+          </div>
+          <div className="text-orange-500/70 text-[8px] md:text-[9px] tracking-[0.3em] uppercase font-mono">
+            Founder &amp; CEO — VIPHACKER.100
+          </div>
         </div>
+
+        {/* Divider */}
+        <div className="w-32 h-px bg-gradient-to-r from-transparent via-cyan-700/50 to-transparent" />
+
+        {/* Social Links */}
+        <div className="flex flex-wrap justify-center gap-5 text-[9px] md:text-[10px] font-mono tracking-widest">
+          <a href="https://viphacker100.com" target="_blank" rel="noopener noreferrer"
+            className="text-slate-500 hover:text-cyan-400 transition-all duration-200 uppercase border-b border-transparent hover:border-cyan-500 pb-0.5">
+            🌐 Website
+          </a>
+          <a href="https://github.com/viphacker100" target="_blank" rel="noopener noreferrer"
+            className="text-slate-500 hover:text-cyan-400 transition-all duration-200 uppercase border-b border-transparent hover:border-cyan-500 pb-0.5">
+            ⌨️ GitHub
+          </a>
+          <a href="https://linkedin.com/in/viphacker100" target="_blank" rel="noopener noreferrer"
+            className="text-slate-500 hover:text-cyan-400 transition-all duration-200 uppercase border-b border-transparent hover:border-cyan-500 pb-0.5">
+            💼 LinkedIn
+          </a>
+          <a href="https://instagram.com/viphacker.100" target="_blank" rel="noopener noreferrer"
+            className="text-slate-500 hover:text-cyan-400 transition-all duration-200 uppercase border-b border-transparent hover:border-cyan-500 pb-0.5">
+            📸 Instagram
+          </a>
+        </div>
+
+        {/* Version tag */}
         <div className="text-slate-700 text-[8px] md:text-[9px] tracking-[0.4em] font-light uppercase text-center px-4 leading-loose">
-          VIPHACKER100 OS V4.2.1 | DESIGNED & DEVELOPED BY <br className="md:hidden" />
-          <span className="text-slate-500 font-bold border-b border-slate-800">VIPHACKER100 (ARYAN AHIRWAR)</span>
+          JARVIS v3.9.0 | VIPHACKER100 OS V4.2.1
         </div>
       </footer>
     </div>
