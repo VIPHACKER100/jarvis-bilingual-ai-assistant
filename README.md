@@ -16,7 +16,7 @@
 
 **JARVIS** is a futuristic, voice-activated AI assistant designed for a high-performance bilingual experience. Operating on the **VIPHACKER100 OS**, it supports both **English** and **Hindi**, providing a natural and human-like interface for users in mixed-language environments. Inspired by the legendary Stark Tech, it features a stunning, mobile-optimized cyberpunk UI powered by a core **Arc Reactor** and backed by the **NVIDIA Nemotron** model via OpenRouter.
 
-### 🌐 [Try the JARVIS v1 Demo Here!](./jarvis-v1.html)
+### 🌐 [Try the JARVIS v1 Demo Here!](./jarvis-v4.html)
 
 ## ✨ Key Features
 
@@ -124,6 +124,7 @@
 🔒 Passionate cybersecurity professional with extensive experience in ethical hacking, penetration testing, and vulnerability research. Building tools and systems that make the digital world safer.
 
 **What I Do:**
+
 - 🕸️ **Web Application Penetration Testing** — Identifying and exploiting vulnerabilities to secure digital assets
 - 🐛 **Bug Bounty Hunting** — Discovering critical security flaws for leading organizations worldwide
 - 🔍 **OSINT** — Leveraging publicly available information for security assessments
@@ -131,6 +132,7 @@
 - 🔧 **Security Tool Development** — Custom tools and scripts for security testing and automation
 
 **My Expertise:**
+
 - ✅ Penetration Testing & Vulnerability Assessment
 - ✅ Web Application Security (OWASP Top 10)
 - ✅ Network Security & Infrastructure Testing
