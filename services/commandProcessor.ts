@@ -10,7 +10,9 @@ export interface ProcessedCommand {
   data?: any;
 }
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
+const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || "";
+const MODEL_NAME = import.meta.env.VITE_MODEL_NAME || "nvidia/nemotron-3-nano-30b-a3b:free";
 
 // ... (keywords remain unchanged)
 
@@ -393,15 +395,17 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
 
   // --- Default Fallback with LLM (OpenRouter or Google Gemini) ---
   try {
-    if (API_KEY && API_KEY !== "PLACEHOLDER_API_KEY") {
+    const activeApiKey = OPENROUTER_API_KEY || GEMINI_API_KEY;
+    
+    if (activeApiKey && activeApiKey !== "PLACEHOLDER_API_KEY") {
       let textResponse = "";
 
-      const isGoogleKey = API_KEY.startsWith("AIza");
+      const isGoogleKey = activeApiKey.startsWith("AIza");
       const systemPrompt = `You are JARVIS, a highly intelligent and helpful AI assistant. Respond in a natural, polite, and human-like manner in ${isHindi ? "Hindi" : "English"}. Avoid sounding overly robotic. Keep it concise (max 2 sentences).`;
 
       if (isGoogleKey) {
         // Direct Google Gemini API
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeApiKey}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -417,11 +421,13 @@ export const processTranscript = async (text: string): Promise<ProcessedCommand>
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${API_KEY}`,
-            "Content-Type": "application/json"
+            "Authorization": `Bearer ${activeApiKey}`,
+            "Content-Type": "application/json",
+            "HTTP-Referer": window.location.origin, // Required by OpenRouter
+            "X-Title": "JARVIS Bilingual AI Assistant" // Optional for OpenRouter
           },
           body: JSON.stringify({
-            "model": "nvidia/nemotron-3-nano-30b-a3b:free",
+            "model": MODEL_NAME,
             "messages": [
               { "role": "system", "content": systemPrompt },
               { "role": "user", "content": text }
